@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>Proboy Studio · App & Game Developer</title>
+    <!-- Font & Icons (free) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background: #0b0d15;
+            color: #eef2f6;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* ---------- LOADING SCREEN ---------- */
+        #loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: #0b0d15;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.8rem;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #loader.hide {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .loader-ring {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.05);
+            border-top: 5px solid #7b61ff;
+            border-right: 5px solid #4fc3ff;
+            animation: spin 1s linear infinite;
+            box-shadow: 0 0 20px rgba(123, 97, 255, 0.2);
+        }
+        .loader-text {
+            font-weight: 600;
+            letter-spacing: 3px;
+            color: #b9b3e6;
+            font-size: 0.9rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* ---------- GLASSMORPHISM & BASE ---------- */
+        .glass {
+            background: rgba(20, 24, 38, 0.6);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 28px;
+            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ---------- NAVIGATION ---------- */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            flex-wrap: wrap;
+            gap: 16px 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .logo-img {
+            height: 48px;
+            width: auto;
+            max-width: 140px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(123, 97, 255, 0.25));
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.03) rotate(-1deg);
+        }
+        .brand-name {
+            font-weight: 700;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #c0b5ff, #8b7cff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: #cfd7e6;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            border-bottom: 2px solid transparent;
+            padding-bottom: 4px;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+            border-bottom-color: #7b61ff;
+        }
+        .nav-links .highlight {
+            background: #7b61ff;
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-weight: 600;
+            border-bottom: none;
+            transition: 0.2s;
+            box-shadow: 0 4px 14px rgba(123, 97, 255, 0.25);
+        }
+        .nav-links .highlight:hover {
+            background: #6a4ee0;
+            transform: scale(1.02);
+            border-bottom: none;
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #cfd7e6;
+        }
+
+        /* ---------- HERO SECTION ---------- */
+        .hero {
+            padding: 50px 0 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .hero-logo {
+            height: 110px;
+            width: auto;
+            object-fit: contain;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 30px rgba(123, 97, 255, 0.2));
+            animation: float 4s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+            100% { transform: translateY(0px); }
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #ffffff 0%, #b9b0ff 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -1px;
+            margin: 6px 0 10px;
+        }
+        .hero .sub {
+            font-size: 1.25rem;
+            color: #a8b3cf;
+            font-weight: 400;
+            letter-spacing: 2px;
+            background: rgba(123, 97, 255, 0.08);
+            padding: 6px 24px;
+            border-radius: 60px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(123, 97, 255, 0.1);
+        }
+        .hero-buttons {
+            margin-top: 32px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 16px;
+        }
+        .btn {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 12px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #f0f4ff;
+            text-decoration: none;
+            transition: 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(4px);
+            background: rgba(10, 12, 22, 0.4);
+            font-size: 1rem;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(145deg, #7b61ff, #5f4ad0);
+            border: none;
+            box-shadow: 0 8px 22px -6px #5f4ad0;
+            color: #fff;
+        }
+        .btn-primary:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 28px -6px #4f3bb0;
+            background: linear-gradient(145deg, #8f77ff, #6a54e0);
+        }
+        .btn-outline:hover {
+            background: rgba(123, 97, 255, 0.15);
+            border-color: #7b61ff;
+            transform: translateY(-2px);
+        }
+
+        /* ---------- SECTION COMMON ---------- */
+        section {
+            padding: 60px 0 40px;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 40px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #eae6ff, #b4a6ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            border-left: 5px solid #7b61ff;
+            padding-left: 18px;
+        }
+
+        /* ---------- CARDS (apps & games) ---------- */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(18, 22, 38, 0.7);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 32px;
+            padding: 24px 22px 28px;
+            transition: all 0.25s ease;
+            box-shadow: 0 12px 24px -16px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(123, 97, 255, 0.25);
+            box-shadow: 0 28px 48px -20px #3d2f8a;
+            background: rgba(24, 28, 48, 0.7);
+        }
+        .card .badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(123, 97, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 4px 14px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #b9acff;
+            border: 1px solid rgba(123, 97, 255, 0.2);
+        }
+        .card-icon {
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            color: #b9acff;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 8px 0 6px;
+        }
+        .card .desc {
+            color: #b5c0db;
+            font-size: 0.9rem;
+            margin: 8px 0 12px;
+            flex: 1;
+        }
+        .card .features {
+            list-style: none;
+            margin: 12px 0 18px;
+            font-size: 0.9rem;
+            color: #cbd3ea;
+        }
+        .card .features li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+        }
+        .card .features i {
+            color: #7b61ff;
+            width: 20px;
+            font-size: 0.8rem;
+        }
+        .card .btn-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 10px 0;
+            border-radius: 60px;
+            text-align: center;
+            font-weight: 600;
+            color: #d6dfff;
+            transition: 0.2s;
+            margin-top: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            cursor: default;
+        }
+        .card .btn-card:hover {
+            background: #7b61ff;
+            border-color: #7b61ff;
+            color: #fff;
+            box-shadow: 0 4px 16px #5f4ad0;
+        }
+        .game-thumb {
+            background: #202536;
+            border-radius: 20px;
+            padding: 24px 8px;
+            text-align: center;
+            font-size: 2.6rem;
+            color: #a294f0;
+            margin-bottom: 10px;
+            border: 1px solid rgba(255,255,255,0.02);
+        }
+
+        /* ---------- ABOUT ---------- */
+        .about-box {
+            max-width: 720px;
+            background: rgba(18, 22, 38, 0.5);
+            backdrop-filter: blur(6px);
+            padding: 36px 44px;
+            border-radius: 48px;
+            border: 1px solid rgba(255,255,255,0.03);
+            font-size: 1.25rem;
+            color: #d3ddf5;
+            line-height: 1.7;
+            box-shadow: 0 30px 40px -30px #000000;
+            margin: 0 auto;
+        }
+
+        /* ---------- SOCIAL SECTION ---------- */
+        .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 12px;
+        }
+        .social-btn {
+            background: rgba(20, 24, 38, 0.7);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255,255,255,0.04);
+            padding: 16px 36px;
+            border-radius: 80px;
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #e8edff;
+            text-decoration: none;
+            transition: 0.25s;
+            min-width: 180px;
+            justify-content: center;
+        }
+        .social-btn i {
+            font-size: 1.7rem;
+        }
+        .social-btn.youtube:hover {
+            background: #cc2b2b;
+            border-color: #ff3b3b;
+            transform: scale(1.03);
+        }
+        .social-btn.email:hover {
+            background: #2b5b9e;
+            border-color: #4a7fd4;
+            transform: scale(1.03);
+        }
+
+        /* ---------- FOOTER ---------- */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.03);
+            padding: 30px 0 20px;
+            text-align: center;
+            color: #7b87a3;
+            font-size: 0.9rem;
+            letter-spacing: 0.3px;
+        }
+        footer span {
+            color: #9b8edb;
+        }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 800px) {
+            .navbar { flex-wrap: wrap; }
+            .nav-links { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px 0; }
+            .nav-links.open { display: flex; }
+            .hamburger { display: block; }
+            .hero h1 { font-size: 2.4rem; }
+            .hero .sub { font-size: 1rem; }
+            .hero-logo { height: 80px; }
+            .about-box { padding: 28px 20px; font-size: 1rem; }
+            .social-btn { min-width: 140px; padding: 14px 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2rem; }
+            .btn { padding: 10px 20px; font-size: 0.9rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+
+        /* scroll helper */
+        .scroll-margin {
+            scroll-margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LOADER -->
+    <div id="loader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">PROBOY STUDIO</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="container">
+
+        <!-- NAVIGATION -->
+        <nav class="navbar">
+            <div class="logo-wrapper">
+                <img class="logo-img" src="https://i.ibb.co.com/gMj1jNP2/file-00000000cb2071fd84a15d10286a5743.png" alt="Proboy Studio Logo">
+                <span class="brand-name">Proboy</span>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="#home">Home</a>
+                <a href="#apps">Apps</a>
+                <a href="#games">Games</a>
+                <a href="#about">About</a>
+                <a href="#social">Social</a>
+                <a href="#contact" class="highlight">Contact</a>
+            </div>
+        </nav>
+
+        <!-- HOME -->
+        <section id="home" class="hero scroll-margin">
+            <img class="hero-logo" src="https://i.ibb.co.com/gMj1jNP2/file-00000000cb2071fd84a15d10286a5743.png" alt="Proboy Studio">
+            <h1>Proboy Studio</h1>
+            <div class="sub">Building Apps & Games Of The Future</div>
+            <div class="hero-buttons">
+                <a href="#apps" class="btn btn-primary"><i class="fas fa-mobile-screen-button"></i> Explore Apps</a>
+                <a href="#games" class="btn btn-primary"><i class="fas fa-gamepad"></i> Explore Games</a>
+                <a href="#contact" class="btn btn-outline"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+        </section>
+
+        <!-- APPS SECTION - PLACEHOLDER CARDS -->
+        <section id="apps" class="scroll-margin">
+            <h2 class="section-title"><i class="fas fa-cube" style="margin-right:12px;"></i> Apps</h2>
+            <div class="card-grid">
+                <!-- App Card 1 -->
+                <div class="card">
+                    <span class="badge">Coming Soon</span>
+                    <div class="card-icon"><i class="fas fa-mobile-screen"></i></div>
+                    <h3>App Name 1</h3>
+                    <div class="desc">App description goes here. Edit this text to describe your app.</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Feature 1</li>
+                        <li><i class="fas fa-check-circle"></i> Feature 2</li>
+                        <li><i class="fas fa-check-circle"></i> Feature 3</li>
+                    </ul>
+                    <div class="btn-card"><i class="fas fa-cloud-arrow-down"></i> Download (soon)</div>
+                </div>
+
+                <!-- App Card 2 -->
+                <div class="card">
+                    <span class="badge">Coming Soon</span>
+                    <div class="card-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                    <h3>App Name 2</h3>
+                    <div class="desc">App description goes here. Edit this text to describe your app.</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Feature 1</li>
+                        <li><i class="fas fa-check-circle"></i> Feature 2</li>
+                        <li><i class="fas fa-check-circle"></i> Feature 3</li>
+                    </ul>
+                    <div class="btn-card"><i class="fas fa-cloud-arrow-down"></i> Download (soon)</div>
+                </div>
+
+                <!-- App Card 3 -->
+                <div class="card">
+                    <span class="badge">Coming Soon</span>
+                    <div class="card-icon"><i class="fas fa-tablet-screen-button"></i></div>
+                    <h3>App Name 3</h3>
+                    <div class="desc">App description goes here. Edit this text to describe your app.</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Feature 1</li>
+                        <li><i class="fas fa-check-circle"></i> Feature 2</li>
+                        <li><i class="fas fa-check-circle"></i> Feature 3</li>
+                    </ul>
+                    <div class="btn-card"><i class="fas fa-cloud-arrow-down"></i> Download (soon)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GAMES SECTION - PLACEHOLDER CARDS -->
+        <section id="games" class="scroll-margin">
+            <h2 class="section-title"><i class="fas fa-gamepad" style="margin-right:12px;"></i> Games</h2>
+            <div class="card-grid">
+                <!-- Game Card 1 -->
+                <div class="card">
+                    <span class="badge">Coming Soon</span>
+                    <div class="game-thumb"><i class="fas fa-gamepad"></i> 🎮</div>
+                    <h3>Game Name 1</h3>
+                    <div class="desc">Game description goes here. Edit this text to describe your game.</div>
+                    <ul class="features">
+                        <li><i class="fas fa-star"></i> Feature 1</li>
+                        <li><i class="fas fa-star"></i> Feature 2</li>
+                        <li><i class="fas fa-star"></i> Feature 3</li>
+                    </ul>
+                    <div class="btn-card"><i class="fas fa-play"></i> Play (soon)</div>
+                </div>
+
+                <!-- Game Card 2 -->
+                <div class="card">
+                    <span class="badge">Coming Soon</span>
+                    <div class="game-thumb"><i class="fas fa-chess-queen"></i> 🏆</div>
+                    <h3>Game Name 2</h3>
+                    <div class="desc">Game description goes here. Edit this text to describe your game.</div>
+                    <ul class="features">
+                        <li><i class="fas fa-star"></i> Feature 1</li>
+                        <li><i class="fas fa-star"></i> Feature 2</li>
+                        <li><i class="fas fa-star"></i> Feature 3</li>
+                    </ul>
+                    <div class="btn-card"><i class="fas fa-play"></i> Play (soon)</div>
+                </div>
+
+                <!-- Game Card 3 -->
+                <div class="card">
+                    <span class="badge">Coming Soon</span>
+                    <div class="game-thumb"><i class="fas fa-rocket"></i> 🚀</div>
+                    <h3>Game Name 3</h3>
+                    <div class="desc">Game description goes here. Edit this text to describe your game.</div>
+                    <ul class="features">
+                        <li><i class="fas fa-star"></i> Feature 1</li>
+                        <li><i class="fas fa-star"></i> Feature 2</li>
+                        <li><i class="fas fa-star"></i> Feature 3</li>
+                    </ul>
+                    <div class="btn-card"><i class="fas fa-play"></i> Play (soon)</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="scroll-margin">
+            <h2 class="section-title"><i class="fas fa-address-card" style="margin-right:12px;"></i> About</h2>
+            <div class="about-box">
+                <i class="fas fa-quote-left" style="color:#7b61ff; opacity:0.5; font-size:1.8rem; margin-right:10px;"></i>
+                Proboy Studio is a creative development studio focused on building innovative apps and games.
+                We blend futuristic design with solid engineering to craft experiences that inspire.
+            </div>
+        </section>
+
+        <!-- SOCIAL + CONTACT -->
+        <section id="social" class="scroll-margin">
+            <h2 class="section-title"><i class="fas fa-share-nodes" style="margin-right:12px;"></i> Connect</h2>
+            <div class="social-links">
+                <a href="https://youtube.com/@proboy_studio?si=Ms7eA7otX-z4MKxk" target="_blank" class="social-btn youtube">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+                <a href="mailto:proboystudio@gmail.com" class="social-btn email">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </div>
+            <div id="contact" style="height: 4px;"></div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 <span>Proboy Studio</span> · Building apps & games of the future.</p>
+            <p style="margin-top: 6px; font-size:0.75rem; opacity:0.6;">crafted with ❤️ + ☕</p>
+        </footer>
+    </div>
+
+    <script>
+        // LOADER
+        window.addEventListener('load', () => {
+            const loader = document.getElementById('loader');
+            loader.classList.add('hide');
+            setTimeout(() => { loader.style.display = 'none'; }, 900);
+        });
+
+        // HAMBURGER
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // SMOOTH SCROLL
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
