@@ -300,10 +300,24 @@
             color: #b9acff;
             border: 1px solid rgba(123, 97, 255, 0.2);
         }
+        .badge.available {
+            background: rgba(46, 213, 115, 0.2);
+            color: #7bed9f;
+            border-color: rgba(46, 213, 115, 0.3);
+        }
         .card-icon {
             font-size: 2.8rem;
             margin-bottom: 8px;
             color: #b9acff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .card-icon img {
+            height: 48px;
+            width: auto;
+            border-radius: 12px;
+            object-fit: contain;
         }
         .card h3 {
             font-size: 1.5rem;
@@ -347,7 +361,12 @@
             font-size: 0.9rem;
             cursor: default;
         }
-        .card .btn-card:hover {
+        .card .btn-card.active {
+            cursor: pointer;
+            background: rgba(123, 97, 255, 0.15);
+            border-color: #7b61ff;
+        }
+        .card .btn-card.active:hover {
             background: #7b61ff;
             border-color: #7b61ff;
             color: #fff;
@@ -498,25 +517,27 @@
             </div>
         </section>
 
-        <!-- APPS SECTION - PLACEHOLDER CARDS -->
+        <!-- APPS SECTION -->
         <section id="apps" class="scroll-margin">
             <h2 class="section-title"><i class="fas fa-cube" style="margin-right:12px;"></i> Apps</h2>
             <div class="card-grid">
-                <!-- App Card 1 -->
+                <!-- MB File Generator - AVAILABLE NOW -->
                 <div class="card">
-                    <span class="badge">Coming Soon</span>
-                    <div class="card-icon"><i class="fas fa-mobile-screen"></i></div>
-                    <h3>App Name 1</h3>
-                    <div class="desc">App description goes here. Edit this text to describe your app.</div>
+                    <span class="badge available"><i class="fas fa-check-circle"></i> Available</span>
+                    <div class="card-icon">
+                        <img src="https://i.ibb.co.com/xSPkhX16/file-00000000f5887208b1fe5f5f349b6293.png" alt="MB File Generator Logo">
+                    </div>
+                    <h3>MB File Generator</h3>
+                    <div class="desc">Generate files of any size directly in your browser. Works 100% locally — no uploads, no tracking.</div>
                     <ul class="features">
-                        <li><i class="fas fa-check-circle"></i> Feature 1</li>
-                        <li><i class="fas fa-check-circle"></i> Feature 2</li>
-                        <li><i class="fas fa-check-circle"></i> Feature 3</li>
+                        <li><i class="fas fa-check-circle"></i> 100% local & private</li>
+                        <li><i class="fas fa-check-circle"></i> Generate any file size</li>
+                        <li><i class="fas fa-check-circle"></i> No data collection</li>
                     </ul>
-                    <div class="btn-card"><i class="fas fa-cloud-arrow-down"></i> Download (soon)</div>
+                    <a href="https://proboystudio.github.io/MbFileGenerator.github.io/" target="_blank" class="btn-card active"><i class="fas fa-external-link-alt"></i> Visit Website</a>
                 </div>
 
-                <!-- App Card 2 -->
+                <!-- App Card 2 - Placeholder -->
                 <div class="card">
                     <span class="badge">Coming Soon</span>
                     <div class="card-icon"><i class="fas fa-mobile-screen-button"></i></div>
@@ -530,7 +551,7 @@
                     <div class="btn-card"><i class="fas fa-cloud-arrow-down"></i> Download (soon)</div>
                 </div>
 
-                <!-- App Card 3 -->
+                <!-- App Card 3 - Placeholder -->
                 <div class="card">
                     <span class="badge">Coming Soon</span>
                     <div class="card-icon"><i class="fas fa-tablet-screen-button"></i></div>
