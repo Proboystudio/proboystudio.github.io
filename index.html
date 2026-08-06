@@ -41,13 +41,12 @@
             flex-direction: column;
             gap: 0.8rem;
             transition: opacity 0.6s ease, visibility 0.6s ease;
-            pointer-events: none; /* prevents accidental clicks while loading */
+            pointer-events: none;
         }
         #loader.hide {
             opacity: 0;
             visibility: hidden;
         }
-        /* Remove from flow after hiding (so it doesn't block interaction) */
         #loader.hidden {
             display: none;
         }
@@ -457,6 +456,23 @@
         footer span {
             color: #9b8edb;
         }
+        /* Privacy policy link in footer */
+        .footer-links {
+            margin-top: 8px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #7b87a3;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-size: 0.85rem;
+        }
+        .footer-links a:hover {
+            color: #b9acff;
+        }
 
         /* ---------- RESPONSIVE ---------- */
         @media (max-width: 800px) {
@@ -650,6 +666,9 @@
         <!-- FOOTER -->
         <footer>
             <p>© 2026 <span>Proboy Studio</span> · Building apps & games of the future.</p>
+            <div class="footer-links">
+                <a href="https://proboystudio.github.io/privacy-policy-/" target="_blank">Privacy Policy</a>
+            </div>
             <p style="margin-top: 6px; font-size:0.75rem; opacity:0.6;">crafted with ❤️ + ☕</p>
         </footer>
     </div>
@@ -661,24 +680,21 @@
 
             function hideLoader() {
                 const elapsed = Date.now() - startTime;
-                const minDisplay = 1000; // show for at least 1 second
+                const minDisplay = 1000;
                 const delay = Math.max(0, minDisplay - elapsed);
 
                 setTimeout(() => {
                     loader.classList.add('hide');
-                    // Remove from accessibility tree and prevent interaction after fade
                     setTimeout(() => {
                         loader.classList.add('hidden');
-                    }, 600); // matches transition duration
+                    }, 600);
                 }, delay);
             }
 
-            // If the page is already loaded (e.g., from cache), hide immediately
             if (document.readyState === 'complete') {
                 hideLoader();
             } else {
                 window.addEventListener('load', hideLoader);
-                // Fallback: hide after 3 seconds even if load event doesn't fire (safety net)
                 setTimeout(hideLoader, 3000);
             }
 
