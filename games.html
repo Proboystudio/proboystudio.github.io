@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0a0c15">
   <meta name="description" content="Game Development Studio. Proboy Studio — We Create Games.">
+  <!-- HTML Guard (DosX-dev/HTML-Guard), pinned to verified main commit c6a975dee2eb4b6298baf96420a8e9ccc0874062. -->
+  <script src="https://cdn.jsdelivr.net/gh/DosX-dev/HTML-Guard@c6a975dee2eb4b6298baf96420a8e9ccc0874062/html-guard.min.js"></script>
+  <script>
+    // Enable documented drag deterrence only. Keep selection, context menus in editable
+    // controls, console diagnostics, and DevTools available to avoid breaking admin workflows.
+    if (typeof HtmlGuard !== "undefined" && HtmlGuard.protections) {
+      HtmlGuard.protections.blockDrag();
+    }
+  </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2795399684074048" crossorigin="anonymous"></script>
   <title>Proboy Studio · Game Development Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,7 +27,7 @@
     body:before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse at 18% 25%,rgba(123,97,255,.13),transparent 48%),radial-gradient(ellipse at 85% 52%,rgba(79,195,255,.08),transparent 48%)}
     a{color:inherit}.container{max-width:1160px;margin:auto;padding:0 24px}.navbar{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:20px 0;border-bottom:1px solid var(--border)}
     .brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brand img{width:clamp(38px,4vw,48px);height:clamp(38px,4vw,48px);aspect-ratio:1;object-fit:contain;object-position:center;flex:0 0 auto;display:block}.brand span{font-size:1.35rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,#e8e3ff,#8b7cff);color:transparent;background-clip:text}
-    .nav-links{display:flex;align-items:center;gap:25px;flex-wrap:wrap}.nav-links a{color:var(--muted);text-decoration:none;font-size:.94rem;font-weight:600;transition:.2s}.nav-links a:hover{color:white}.hamburger{display:none;border:0;background:none;color:var(--text);font-size:1.5rem;padding:8px;cursor:pointer}
+    .nav-links{display:flex;align-items:center;gap:25px;flex-wrap:wrap}.nav-links a{color:var(--muted);text-decoration:none;font-size:.94rem;font-weight:600;transition:.2s}.nav-links a:hover{color:white}.hamburger{display:none;position:relative;z-index:20;flex-shrink:0;border:0;background:none;color:var(--text);font-size:1.5rem;padding:10px;cursor:pointer;touch-action:manipulation;pointer-events:auto}
     .hero{text-align:center;padding:70px 0 66px}.hero-logo{width:clamp(78px,14vw,132px);height:clamp(78px,14vw,132px);aspect-ratio:1;object-fit:contain;object-position:center;display:block;margin:0 auto 15px;filter:drop-shadow(0 10px 35px rgba(123,97,255,.14))}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#c5bbff;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1.8px;margin-bottom:10px}.hero h1{font-size:clamp(2.4rem,7vw,4.4rem);line-height:1.12;letter-spacing:-2px;font-weight:800;background:linear-gradient(145deg,#fff,#b9b0ff 82%);color:transparent;background-clip:text}.hero .tagline{font-size:clamp(1rem,2.4vw,1.22rem);color:var(--muted);margin:19px auto 0;max-width:720px}.hero .description{color:#8491b0;max-width:700px;margin:12px auto 0;font-size:.98rem}.hero-buttons{margin-top:30px;display:flex;justify-content:center;gap:13px;flex-wrap:wrap}.btn{display:inline-flex;justify-content:center;align-items:center;gap:9px;padding:13px 23px;border-radius:14px;text-decoration:none;font-weight:700;font-size:.94rem;transition:transform .2s,border-color .2s,background .2s}.btn:hover{transform:translateY(-2px)}.btn-primary{background:linear-gradient(135deg,#8067ff,#5f49ce);box-shadow:0 10px 28px rgba(95,74,208,.24);color:#fff}.btn-outline{background:rgba(255,255,255,.025);border:1px solid var(--border);color:#edf0ff}
     section.content-section{padding:30px 0 58px}.section-heading{text-align:center;margin-bottom:28px}.section-heading .kicker{font-size:.76rem;letter-spacing:1.8px;text-transform:uppercase;color:#9e90ff;font-weight:800}.section-heading h2{font-size:clamp(1.7rem,4vw,2.25rem);margin-top:5px;letter-spacing:-.8px}.section-heading p{color:var(--muted);margin:9px auto 0;max-width:680px;font-size:.95rem}
     .app-card{display:flex;flex-direction:column;gap:13px;align-items:flex-start}.app-icon{width:76px;height:76px;border-radius:19px;object-fit:contain;object-position:center;background:rgba(123,97,255,.12);border:1px solid var(--border)}.app-icon-placeholder{width:76px;height:76px;border-radius:19px;display:grid;place-items:center;background:rgba(123,97,255,.12);color:#a99aff;font-size:2rem;border:1px solid var(--border)}.app-card .app-details{width:100%;flex:1}.app-card .app-details h3{margin-bottom:7px}.app-card .app-details p{min-height:2.6em}.playstore-badge{width:22px;height:22px;object-fit:contain}.app-status{display:inline-flex;align-items:center;gap:8px;color:#c7beff;border:1px solid rgba(123,97,255,.22);background:rgba(123,97,255,.08);padding:8px 11px;border-radius:10px;font-size:.83rem;font-weight:700}.app-card .btn{margin-top:auto}
@@ -30,14 +39,25 @@
     .social-icon{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border-radius:15px;background:rgba(123,97,255,.14);color:#c4baff;font-size:1.45rem}
     .social-copy{min-width:0;flex:1}.social-copy h3{font-size:1.05rem;margin:0 0 3px}.social-copy p{font-size:.86rem;color:var(--muted);overflow-wrap:anywhere}.social-arrow{color:#9c8dff}
     footer{border-top:1px solid var(--border);padding:28px 0 22px;color:#7b87a3;text-align:center;font-size:.88rem}footer strong{color:#b8abff}.footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:9px}.footer-links a{color:#8590ac;text-decoration:none}.footer-links a:hover{color:#c8beff}
-    @media(max-width:720px){.container{padding:0 17px}.hamburger{display:block}.navbar{gap:8px}.nav-links{display:none;flex-basis:100%;align-items:stretch;flex-direction:column;gap:0;padding:8px 0 3px}.nav-links.open{display:flex}.nav-links a{padding:10px 4px}.hero{padding:48px 0 48px}.hero-logo{width:88px;height:88px}.hero h1{letter-spacing:-1.2px}.card{padding:22px}.hero .description{font-size:.93rem}}
+    @media(max-width:720px){.container{padding:0 17px}.hamburger{display:block}.navbar{gap:8px}.nav-links{display:none;flex-basis:100%;align-items:stretch;flex-direction:column;gap:0;padding:8px 0 3px}.nav-links.open{display:flex;position:relative;z-index:10}.nav-links a{padding:10px 4px}.hero{padding:48px 0 48px}.hero-logo{width:88px;height:88px}.hero h1{letter-spacing:-1.2px}.card{padding:22px}.hero .description{font-size:.93rem}}
     @media(max-width:720px){.brand img{width:38px;height:38px}.brand span{font-size:1.1rem}.container{padding-left:16px;padding-right:16px}.navbar{align-items:center}.nav-links{min-width:0}.hero-logo{width:82px;height:82px}}
     @media(max-height:520px) and (orientation:landscape){.container{max-width:100%;padding-left:clamp(14px,3vw,32px);padding-right:clamp(14px,3vw,32px)}.navbar{padding:10px 0}.brand img{width:36px;height:36px}.hero{padding:22px 0 22px}.hero-logo{width:64px;height:64px;margin-bottom:8px}.hero h1{font-size:clamp(1.7rem,5vh,2.8rem);letter-spacing:-.5px}.hero .tagline{margin-top:7px;font-size:.98rem}.hero .description{margin-top:5px;font-size:.88rem}.hero-buttons{margin-top:12px}.content-section{padding:18px 0 25px!important}.section-heading{margin-bottom:18px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;scroll-behavior:auto!important;transition:none!important}}
-    #games[hidden]{display:none!important}
+    #games[hidden],#home[hidden],#about[hidden],#social-media[hidden]{display:none!important}
   
     body.games-page #home, body.games-page #about, body.games-page #social-media { display:none!important; }
     body.games-page #games { display:block!important; min-height:65vh; }
+  </style>
+
+  <!-- Image-save deterrence: blocks the usual context-menu/drag shortcuts for displayed images. -->
+  <style id="image-download-deterrence">
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+    }
   </style>
 </head>
 <body class="games-page">
@@ -46,7 +66,7 @@
       <nav class="navbar" aria-label="Main navigation">
         <a class="brand" href="index.html" aria-label="Proboy Studio home"><img src="proboystudio.png" data-site-logo alt="Proboy Studio logo"><span data-field="siteName">Proboy Studio</span></a>
         <button class="hamburger" id="hamburger" type="button" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i></button>
-        <div class="nav-links" id="navLinks"><a href="#home">Home</a><a href="games.html">Games</a><a href="#about">About</a><a href="#social-media">Social Media</a></div>
+        <div class="nav-links" id="navLinks"><a href="index.html#home">Home</a><a href="games.html">Games</a><a href="index.html#about">About</a><a href="index.html#social-media">Social Media</a></div>
       </nav>
     </header>
     <main>
@@ -60,6 +80,18 @@
       </section>
       <section id="games" class="content-section">
         <div class="section-heading"><div class="kicker">All games in one place</div><h2>Games</h2><p>Explore games created by Proboy Studio across platforms.</p></div>
+        <div class="games-ad-unit" style="margin:24px auto; max-width:100%; overflow:hidden; text-align:center;" aria-label="Advertisement">
+          <!-- Ad banner games category -->
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-2795399684074048"
+               data-ad-slot="1279976311"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>
+               (adsbygoogle = window.adsbygoogle || []).push({});
+          </script>
+        </div>
         <div id="gamesGrid" class="card-grid" aria-live="polite"></div>
       </section>
       <section id="about" class="content-section">
@@ -81,7 +113,7 @@
         </div>
       </section>
     </main>
-    <footer><p>© <span data-field="copyrightDate">2026</span> <strong data-field="siteName">Proboy Studio</strong> · <span data-field="footerText">Proboy Studio — We Create Games.</span></p><div class="footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="mailto:proboystudio@gmail.com" id="footerContactLink">Contact</a><a href="1admin.html">Admin Panel</a></div></footer>
+    <footer><p>© <span data-field="copyrightDate">2026</span> <strong data-field="siteName">Proboy Studio</strong> · <span data-field="footerText">Proboy Studio — We Create Games.</span></p><div class="footer-links"><a href="privacy-policy.html">Privacy Policy</a><a href="mailto:proboystudio@gmail.com" id="footerContactLink">Contact</a></div></footer>
   </div>
   <script>
     (function () {
@@ -119,9 +151,21 @@
       };
       function clone(value) { return JSON.parse(JSON.stringify(value)); }
       const GAME_PLATFORMS = ['web', 'android', 'ios', 'pc'];
+      const isGamesPage = /(?:^|\/)games\.html$/i.test(window.location.pathname);
+      function isProboyHomepageLink(value) {
+        const raw = String(value || '').trim();
+        if (!raw || raw.startsWith('//')) return false;
+        try {
+          const url = new URL(raw, window.location.href);
+          const localOrigins = new Set([window.location.origin, 'https://proboystudio.github.io']);
+          return localOrigins.has(url.origin) && (url.pathname === '/' || /^\/index\.html?$/i.test(url.pathname));
+        } catch (_) { return false; }
+      }
       function normalizePublicGame(game) {
         const oldUrl = String(game.url || '').trim();
-        const webUrl = String(game.webUrl || (oldUrl && oldUrl !== '#games' ? oldUrl : '')).trim();
+        const rawWebUrl = String(game.webUrl || (oldUrl && oldUrl !== '#games' ? oldUrl : '')).trim();
+        const webUrl = isProboyHomepageLink(rawWebUrl) ? '' : rawWebUrl;
+        const safeOldUrl = isProboyHomepageLink(oldUrl) ? '' : oldUrl;
         const androidUrl = String(game.androidUrl || game.playStoreUrl || '').trim();
         const iosUrl = String(game.iosUrl || game.appStoreUrl || '').trim();
         const pcUrl = String(game.pcUrl || '').trim();
@@ -130,7 +174,7 @@
           : GAME_PLATFORMS.filter((platform) => ({web:webUrl, android:androidUrl, ios:iosUrl, pc:pcUrl})[platform]);
         if (!Array.isArray(game.platforms) && !platforms.length && webUrl) platforms.push('web');
         return { ...game, category: 'Games', platforms, webUrl, androidUrl, iosUrl, pcUrl,
-          url: webUrl || oldUrl || '#games', hidden: game.hidden === true || game.hidden === 'true',
+          url: webUrl || safeOldUrl || '#games', hidden: game.hidden === true || game.hidden === 'true',
           imageFit: game.imageFit === 'contain' ? 'contain' : 'cover' };
       }
       function loadData() {
@@ -140,7 +184,7 @@
           return { ...clone(defaults), ...saved, apps: [],
             features: Array.isArray(saved.features) ? saved.features.map(item => ({ ...item, hidden: item.hidden === true || item.hidden === 'true' })).filter(item => !/^(ai projects|web projects|web development)$/i.test(String(item.title || '').trim())) : clone(defaults.features),
             games: Array.isArray(saved.games) ? saved.games.map(normalizePublicGame) : [],
-            apps: Array.isArray(saved.apps) ? saved.apps.map(item => ({ ...item, hidden: item.hidden === true || item.hidden === 'true', platform: ['android','ios','both'].includes(String(item.platform || '').toLowerCase()) ? String(item.platform).toLowerCase() : (item.appStoreUrl ? 'ios' : 'android') })) : [],
+            apps: [],
             contactEmail: String(saved.contactEmail || defaults.contactEmail),
             logoData: typeof saved.logoData === 'string' ? saved.logoData : '',
             logoUrl: typeof saved.logoUrl === 'string' ? saved.logoUrl : ''
@@ -155,11 +199,12 @@
         const raw = String(value || '').trim();
         if (!raw || raw.startsWith('//') || /^(javascript|data|vbscript|file|blob):/i.test(raw)) return '#games';
         if (raw.startsWith('#')) return /^#[A-Za-z0-9_-]+$/.test(raw) ? raw : '#games';
+        if (isProboyHomepageLink(raw)) return '#games';
         try {
           const root = new URL('./', window.location.href);
           const url = /^[a-z][a-z0-9+.-]*:/i.test(raw) ? new URL(raw) : new URL(raw.replace(/^\.\//, ''), root);
           if (!['http:', 'https:'].includes(url.protocol)) return '#games';
-          if (url.origin === root.origin && url.pathname.replace(/\/$/, '') === root.pathname.replace(/\/$/, '') && !url.search && !url.hash) return '#games';
+          if (isProboyHomepageLink(url.href)) return '#games';
           return url.href;
         } catch (error) { return '#games'; }
       }
@@ -234,7 +279,7 @@
         if (/^building games, ai & web projects\.?$/i.test(String(displayData.footerText || '').trim())) displayData.footerText = defaults.footerText;
         if (String(displayData.primaryButton || '').trim() === 'Explore Web Games') displayData.primaryButton = defaults.primaryButton;
         if (String(displayData.secondaryButton || '').trim() === 'Discover Studio') displayData.secondaryButton = defaults.secondaryButton;
-        document.title = siteName + ' · Game Development Studio';
+        document.title = siteName + (isGamesPage ? ' · Games' : ' · Game Development Studio');
         const descriptionMeta = document.querySelector('meta[name="description"]');
         if (descriptionMeta) descriptionMeta.content = displayData.description || defaults.description;
         ['siteName', 'tagline', 'description', 'aboutTitle', 'aboutDescription', 'primaryButton', 'secondaryButton', 'footerText', 'copyrightDate'].forEach(key => setField(key, String(displayData[key] || '').trim() || defaults[key]));
@@ -332,10 +377,26 @@
         navLinks.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false');
         hamburger.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
       }));
-      // Keep the homepage focused on the studio. Show the Games category only when requested.
-        else if (location.hash === '#home' || !location.hash) setGamesView(false, false);
-      });
-      if (location.hash === '#games') setGamesView(true, false);
+      // The homepage and Games listing are separate pages. On games.html, show only the Games section.
+      function applyPageView() {
+        const homeSection = document.getElementById('home');
+        const gamesSection = document.getElementById('games');
+        const aboutSection = document.getElementById('about');
+        const socialSection = document.getElementById('social-media');
+        if (isGamesPage) {
+          homeSection.hidden = true;
+          gamesSection.hidden = false;
+          aboutSection.hidden = true;
+          socialSection.hidden = true;
+        } else {
+          homeSection.hidden = false;
+          gamesSection.hidden = true;
+          aboutSection.hidden = false;
+          socialSection.hidden = false;
+        }
+      }
+      window.addEventListener('hashchange', applyPageView);
+      applyPageView();
       window.addEventListener('storage', event => { if (event.key === STORAGE_KEY || event.key === null) render(); });
       // Copyright date/year is editable from the protected Admin Panel.
       render();
@@ -351,7 +412,7 @@
           cloudData = { ...clone(defaults), ...saved, apps: [],
             features: Array.isArray(saved.features) ? saved.features.map(item => ({ ...item, hidden: item.hidden === true || item.hidden === 'true' })).filter(item => !/^(ai projects|web projects|web development)$/i.test(String(item.title || '').trim())) : clone(defaults.features),
             games: Array.isArray(saved.games) ? saved.games.map(normalizePublicGame) : [],
-            apps: Array.isArray(saved.apps) ? saved.apps.map(item => ({ ...item, hidden: item.hidden === true || item.hidden === 'true', platform: ['android','ios','both'].includes(String(item.platform || '').toLowerCase()) ? String(item.platform).toLowerCase() : (item.appStoreUrl ? 'ios' : 'android') })) : [],
+            apps: [],
             contactEmail: String(saved.contactEmail || defaults.contactEmail),
             logoData: typeof saved.logoData === 'string' ? saved.logoData : '',
             logoUrl: typeof saved.logoUrl === 'string' ? saved.logoUrl : ''
@@ -375,5 +436,63 @@
       }
     })();
   </script>
+
+  <script id="image-download-deterrence-script">
+    (() => {
+      // Deterrence only: image files may still be retrieved through browser tools/direct URLs.
+      const findImage = (target) => target instanceof Element ? target.closest('img') : null;
+      document.addEventListener('contextmenu', (event) => {
+        if (findImage(event.target)) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+      document.addEventListener('dragstart', (event) => {
+        if (findImage(event.target)) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+      document.addEventListener('selectstart', (event) => {
+        if (findImage(event.target)) event.preventDefault();
+      }, true);
+    })();
+  </script>
+
+  <!-- Code-access deterrence only; browser-delivered HTML/JS cannot be made secret. -->
+  <script id="code-protection-deterrence">
+    (() => {
+      'use strict';
+      const isEditable = (target) => target instanceof Element && !!target.closest(
+        'input, textarea, select, [contenteditable=""], [contenteditable="true"], [role="textbox"]'
+      );
+      document.addEventListener('keydown', (event) => {
+        const key = String(event.key || '').toLowerCase();
+        const mod = event.ctrlKey || event.metaKey;
+        const inspectCombo = mod && event.shiftKey && ['i', 'j', 'c', 'k'].includes(key);
+        const sourceOrSave = mod && ['u', 's'].includes(key);
+        const printPage = mod && key === 'p';
+        const devtoolsKey = key === 'f12';
+        // Do not interfere with editing controls, except F12 which is never needed in a form.
+        if (devtoolsKey || ((!isEditable(event.target)) && (inspectCombo || sourceOrSave || printPage))) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }, true);
+      document.addEventListener('contextmenu', (event) => {
+        if (!isEditable(event.target)) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+      }, true);
+      // Prevent simple source-copy shortcuts, but leave normal copy/paste in inputs usable.
+      document.addEventListener('copy', (event) => {
+        if (!isEditable(event.target) && window.getSelection()?.toString()) {
+          event.preventDefault();
+        }
+      }, true);
+    })();
+  </script>
+
 </body>
 </html>
